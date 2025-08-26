@@ -23,3 +23,4 @@ fmritool make-demo
 fmritool prep --func examples/demo_func.nii.gz --out derivatives
 fmritool first-level --func derivatives/preproc_demo_func.nii.gz --events examples/events.tsv --out first_level
 fmritool viz --zmap first_level/zmap_condA-condB.nii.gz --threshold 2.0
+```
