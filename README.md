@@ -30,5 +30,5 @@ fmritool viz --zmap first_level/zmap_condA-condB.nii.gz --threshold 2.0
 
 ## Demo Output
 
-![Glass brain](first_level/zmap_condA-condB_glass.png)
-![Stat map](first_level/zmap_condA-condB_stat.png)
+![Glass brain](https://raw.githubusercontent.com/asraf2022/fmri-tool/main/first_level/zmap_condA-condB_glass.png)
+![Stat map](https://raw.githubusercontent.com/asraf2022/fmri-tool/main/first_level/zmap_condA-condB_stat.png)
