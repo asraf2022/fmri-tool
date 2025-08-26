@@ -1,0 +1,19 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+env/
+venv/
+.ipynb_checkpoints/
+# data & outputs
+*.nii
+*.nii.gz
+*.tsv
+derivatives/
+first_level/
+group_level/
+# os / editor
+.DS_Store
+.vscode/
+.idea/

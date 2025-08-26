@@ -1,0 +1,15 @@
+name: fmritool
+channels: [conda-forge]
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - nibabel
+  - nilearn
+  - typer
+  - rich
+  - matplotlib
+  - reportlab
+  - pip
+  - pip:
+      - streamlit
