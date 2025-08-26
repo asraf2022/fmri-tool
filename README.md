@@ -28,10 +28,7 @@ fmritool viz --zmap first_level/zmap_condA-condB.nii.gz --threshold 2.0
 
 ## Demo Output
 
-After running the demo, you’ll see outputs like these:
+## Demo Output
 
-<p align="center">
-  <img src="first_level/zmap_condA-condB_glass.png" alt="Glass brain" width="45%">
-  &nbsp;&nbsp;
-  <img src="first_level/zmap_condA-condB_stat.png" alt="Stat map" width="45%">
-</p>
+![Glass brain](first_level/zmap_condA-condB_glass.png)
+![Stat map](first_level/zmap_condA-condB_stat.png)
