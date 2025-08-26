@@ -7,15 +7,7 @@ A tiny, beginner-friendly fMRI analysis tool (demo) that:
 
 We'll grow this into a full pipeline (FSL/SPM via Nipype, group analysis, QC reports, Streamlit UI).
 
-## Demo Output
 
-After running the demo + first-level GLM, you’ll get a Z-map and preview images:
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/asraf2022/fmri-tool/first_level/zmap_condA-condB.nii_glass.png" alt="Glass brain" width="45%">
-  &nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/asraf2022/fmri-tool/first_level/zmap_condA-condB.nii_stat.png" alt="Stat map" width="45%">
-</p>
 
 **How to reproduce:**
 ```bash
