@@ -17,3 +17,7 @@ group_level/
 .vscode/
 .idea/
 runs/
+rs_derivatives/
+rs_*.nii.gz
+rs_*.csv
+rs_*.png
