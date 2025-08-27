@@ -72,6 +72,75 @@ def visualize(
     print(f"Saved glass brain: {glass}")
     print(f"Saved stat map:    {stat}")
 
+from fmritool.pipeline import run_pipeline
+
+@app.command()
+def pipeline(
+    func: str = typer.Option(..., help="Path to raw functional 4D NIfTI"),
+    events: str = typer.Option(..., help="Path to events.tsv (onset,duration,trial_type)"),
+    out: str = typer.Option("runs", help="Output root folder"),
+    tr: float = typer.Option(2.0, help="TR (s)"),
+    hrf: str = typer.Option("spm", help="HRF model: spm|glover"),
+    high_pass: float = typer.Option(1/128, help="High-pass (Hz), e.g., 0.0078"),
+    fwhm: float = typer.Option(6.0, help="Smoothing FWHM (mm)"),
+    contrast: str = typer.Option("condA - condB", help="Contrast expression, e.g., 'condA - condB'"),
+    viz_threshold: float = typer.Option(3.0, help="Z threshold for plotting"),
+):
+    """
+    Run preprocess -> first-level GLM -> PNG visualization in one go.
+    """
+    paths = run_pipeline(
+        func=func,
+        events=events,
+        out_root=out,
+        tr=tr,
+        hrf=hrf,
+        high_pass=high_pass,
+        fwhm=fwhm,
+        contrast=contrast,
+        viz_threshold=viz_threshold,
+    )
+    for k, v in paths.items():
+        print(f"{k}: {v}")
+
+from fmritool.io_utils import find_bids_runs
+from fmritool.pipeline import run_pipeline
+
+@app.command("bids-pipeline")
+def bids_pipeline(
+    bids: str = typer.Option(..., help="Path to BIDS root"),
+    subject: str = typer.Option(None, help='Subject label, e.g., "01" (omit "sub-")'),
+    task: str = typer.Option(None, help='Task label, e.g., "faces"'),
+    out: str = typer.Option("runs", help="Output root folder"),
+    tr: float = typer.Option(2.0, help="TR (s)"),
+    hrf: str = typer.Option("spm", help="HRF model: spm|glover"),
+    high_pass: float = typer.Option(1/128, help="High-pass (Hz)"),
+    fwhm: float = typer.Option(6.0, help="Smoothing FWHM (mm)"),
+    contrast: str = typer.Option("condA - condB", help="Contrast expression"),
+    viz_threshold: float = typer.Option(3.0, help="Z threshold for plotting"),
+):
+    """
+    Run the end-to-end pipeline for each BOLD run found in a BIDS dataset.
+    """
+    pairs = find_bids_runs(bids_root=bids, subject=subject, task=task)
+    print(f"Found {len(pairs)} run(s).")
+    for i, (func, events) in enumerate(pairs, 1):
+        run_out = f"{out}/sub-{subject or 'ALL'}_run-{i}"
+        print(f"[{i}/{len(pairs)}] func={func} events={events} -> out={run_out}")
+        paths = run_pipeline(
+            func=func,
+            events=events,
+            out_root=run_out,
+            tr=tr,
+            hrf=hrf,
+            high_pass=high_pass,
+            fwhm=fwhm,
+            contrast=contrast,
+            viz_threshold=viz_threshold,
+        )
+        for k, v in paths.items():
+            print(f"  {k}: {v}")
+
 
 if __name__ == "__main__":
     app()
